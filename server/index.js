@@ -14,7 +14,7 @@ const args = name => `middleware:${name}:module:arguments`;
 const app = express();
 
 const opts = onconfigThunk(args('session'))({
-  onconfig: function (config, next) {
+  onconfig(config, next) {
     const [{ store: sessionStore, name, secret }] = config.get(args('session'));
     const groups = Groups({store: sessionStore, name, secret});
     const sentiments = config.get('sentiments');
