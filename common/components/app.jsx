@@ -6,6 +6,12 @@ import Controller from './controller';
 import { Link } from 'react-router';
 import Websocket from './websocket';
 import React from 'react';
+import { IntlProvider, IntlMixin } from 'react-intl';
+import ReactMixin  from 'react-mixin';
+
+const locales = ['en-US'];
+
+const messages = {'Connections': 'foobar'};
 
 const style = {
   textAlign: 'center',
@@ -29,14 +35,18 @@ const style = {
 export default class App extends React.Component {
   render() {
     return (
-      <Controller>
-        <Websocket>
-          <MainBar {...this.props}></MainBar>
-        </Websocket>
-      </Controller>
+      <IntlProvider messages={messages}>
+        <Controller>
+          <Websocket>
+            <MainBar {...this.props}></MainBar>
+          </Websocket>
+        </Controller>
+      </IntlProvider>
     );
   }
 }
+
+ReactMixin.onClass(App, IntlMixin);
 
 export class MainBar extends React.Component {
   render () {

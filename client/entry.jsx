@@ -6,6 +6,7 @@ import createStore from '../common/store';
 import * as mocks from '../common/mocks';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import { IntlProvider } from 'react-intl';
 
 import React from 'react';
 
@@ -14,10 +15,19 @@ let history = new History();
 let initialData = __INITIALSTATE__ || mocks.slides;
 let store = createStore(initialData);
 
+var intlData = {
+  locale: 'en',
+  messages: {
+    'connections': 'foobar'
+  }
+};
+
 let elements = [
-  <Provider store={store}>
-    {() => <Router history={history} routes={rootRoute} />}
-  </Provider>
+  <IntlProvider key="intl" {...intlData}>
+    <Provider store={store}>
+      {() => <Router history={history} routes={rootRoute} />}
+    </Provider>
+  </IntlProvider>
 ];
 if (process.env.NODE_DEVTOOLS) {
   elements.push(

@@ -1,5 +1,13 @@
 import React from 'react';
 
+const messages = {
+  connections: {
+    id: 'connections',
+    description: 'Connections to be shown',
+    defaultMessage: 'Connections'
+  }
+};
+
 const style = {
   display: 'inline-block',
   padding: '9px 5px',
@@ -16,7 +24,11 @@ export default class ConnectionsBar extends React.Component {
   render () {
     const { connections } = this.props;
     return (
-      <p style={style} className='connections'>Connections: { connections }</p>
+      <p style={style} className='connections'>
+        <FormattedMessage {...messages.connections}>
+          {text => <h1>{text}</h1>}hey
+        </FormattedMessage>
+      </p>
     );
   }
 }
